@@ -4,9 +4,9 @@ const chance = require("chance");
 const Chance = new chance();
 const { generateCustomer, makeEvent } = require('./generateCustomer');
 function sendPackage() {
-  const document = makeEvent(generateCustomer())
-  console.log(document);
-  socket.emit("vendor", document);
+  const packDoc = makeEvent(generateCustomer())
+  console.log(packDoc);
+  socket.emit("vendor", packDoc);
   //setTimeout(sendPackage, Chance.natural({ min: 5000, max: 10000 }));
   // Emit any events we want
 }

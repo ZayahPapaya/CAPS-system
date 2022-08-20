@@ -4,9 +4,9 @@ const { transitEvent } = require('./eventHelpers');
 const chance = require("chance");
 const Chance = new chance();
 function sendPackage() {
-  socket.on("vendorResponse", (document) => {
-    console.log(document);
-    socket.emit("driver", transitEvent(document))
+  socket.on("vendorResponse", (packDoc) => {
+    console.log(packDoc);
+    socket.emit("driver", transitEvent(packDoc))
   });
   //setTimeout(sendPackage, Chance.natural({ min: 5000, max: 10000 }));
 }

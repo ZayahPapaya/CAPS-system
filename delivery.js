@@ -6,9 +6,9 @@ const Chance = new chance();
 function sendPackage() {
   
   //setTimeout(sendPackage, Chance.natural({ min: 5000, max: 10000 }));
-  socket.on("driverResponse", (document) => {
-    console.log(document);
-    socket.emit("delivery", deliveryEvent(document));
+  socket.on("driverResponse", (packDoc) => {
+    console.log(packDoc);
+    socket.emit("delivery", deliveryEvent(packDoc));
 });
 }
 sendPackage();
