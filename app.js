@@ -7,8 +7,8 @@ io.on("connection", (client) => {
   console.log('connection')
   allClients.push(client);
   // Instrument clients will send us measurements
-  client.on("vendor", (package) => {vendor(package)});
-  client.on("driver",(package) => {driver(package)});
+  client.on("vendor", (packDoc) => {vendor(packDoc)});
+  client.on("driver",(packDoc) => {driver(packDoc)});
   client.on("delivery", delivery);
 });
 

@@ -1,5 +1,6 @@
 'use strict';
-const { caps, makeEvent, transitEvent, deliveryEvent, } = require('../app');
+const { caps, transitEvent, deliveryEvent, } = require('../app');
+const { makeEvent } = require('../generateCustomer');
 const spy = jest.spyOn(caps, 'emit');
 
 describe('CAPS', () => {
