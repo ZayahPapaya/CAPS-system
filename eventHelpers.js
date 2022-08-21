@@ -1,11 +1,12 @@
-function transitEvent(event) {
-  event.status = "transit";
+function transitEvent(event, driver) {
+  event.transit = true;
+  event.driver = driver;
   event.time = convertTimestamp(Date.now());
   return event;
 };
 
 function deliveryEvent(event) {
-  event.status = "delivered";
+  event.delivered = true;
   event.time = convertTimestamp(Date.now());
   return event;
 }

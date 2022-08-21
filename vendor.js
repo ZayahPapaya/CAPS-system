@@ -3,6 +3,13 @@ const socket = io("ws://localhost:3500");
 const chance = require("chance");
 const Chance = new chance();
 const { generateCustomer, makeEvent } = require('./generateCustomer');
+
+socket.on("mailResponse", (mail) => {
+  console.log(mail);
+  socket.emit("mailRecieved");
+});
+socket.emit("mailRequest");
+
 function sendPackage() {
   const packDoc = makeEvent(generateCustomer())
   console.log(packDoc);
