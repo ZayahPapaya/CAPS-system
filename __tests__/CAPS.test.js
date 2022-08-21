@@ -1,42 +1,28 @@
 'use strict';
-const { caps, transitEvent, deliveryEvent, } = require('../app');
+const { caps, killCommand} = require('../app');
+const { transitEvent, deliveryEvent } = require('../eventHelpers');
 const { makeEvent } = require('../generateCustomer');
 const spy = jest.spyOn(caps, 'emit');
 
+let response;
 describe('CAPS', () => {
   it('Makes a package', () => {
-    const response = makeEvent({ store: "The Drunken Huntsman", address: "Plains District, Whiterun", customer: "Nazeem" });
-    console.log(response);
-    expect(response.status).toBe("pickup");
+    response = makeEvent({ store: "A store", address: "A place", customer: "Test Guy" });
+    //console.log('First');
+    expect(response.payload.customer).toBe("Test Guy");
   });
 
   it('Moves a package', () => {
-    const response = transitEvent({
-      status: 'transit',
-      time: 'Samstag, 13. August, 4:41 PM',
-      payload:
-      {
-        store: 'Starbucks',
-        orderID: 1,
-        address: 'Pick one',
-        customer: 'A mermaid'
-      }
-    });
-    expect(response.status).toBe("transit");
+    response = transitEvent(response, "Lenny");
+    //console.log('Second');
+    //console.log(moved);
+    expect(response.driver).toBe("Lenny");
   });
 
   it('Delivers a package', () => {
-    const response = deliveryEvent({
-      status: 'delivered',
-      time: 'Samstag, 13. August, 4:41 PM',
-      payload:
-      {
-        store: 'Starbucks',
-        orderID: 1,
-        address: 'Pick one',
-        customer: 'A mermaid'
-      }
-    });
-    expect(response.status).toBe("delivered");
+    response = deliveryEvent(response);
+    console.log('Third')
+    //killCommand();
+    expect(response.delivered).toBe(true);
   });
 });// test that it's emitting and logging

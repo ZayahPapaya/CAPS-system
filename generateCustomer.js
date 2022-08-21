@@ -35,7 +35,9 @@ function makeEvent(payload)
 {
   const { store, address, customer } = payload;
   return {
-    status: "pickup",
+    driver: null,
+    transit: false,
+    delivered: false,
     time: convertTimestamp(Date.now()),
     payload: {
       store,
